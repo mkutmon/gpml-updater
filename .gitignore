@@ -1,6 +1,7 @@
 *.class
+gpml-updater.jar
+build/
 
 # Package Files #
-*.jar
 *.war
 *.ear

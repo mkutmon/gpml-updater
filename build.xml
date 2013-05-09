@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<project name="GPML Updater" default="jar" basedir=".">
+	<property name="src.dir" value="src"/>
+	<property name="build.dir" value="build"/>
+	<property name="jar.name" value="gpml-updater.jar"/>
+	
+	<path id="class.path">
+		<fileset dir="lib">
+			<include name="*.jar"/>
+		</fileset>
+	</path>
+
+	<target name="prepare">
+		<mkdir dir="${build.dir}"/>
+	</target>
+
+	<target name="clean" description="Remove all generated files.">
+		<delete dir="${build.dir}"/>
+	</target>
+
+	<target name="compile" depends="prepare" description="Compile sources">
+		<javac srcdir="${src.dir}"
+			   includes="**"
+			   destdir="${build.dir}"
+			   debug="true"
+			   source="1.5">
+			<classpath refid="class.path"/>
+		</javac>
+	</target>
+
+	<target name="jar" depends="compile" description="Generates executable jar file">
+		<unjar dest="${build.dir}">
+			<fileset dir="lib" includes="com.springsource.org.jdom-1.1.0.jar" />
+			<fileset dir="lib" includes="org.bridgedb.jar" />
+			<fileset dir="lib" includes="org.bridgedb.bio.jar" />
+			<fileset dir="lib" includes="org.pathvisio.core.jar" />
+		</unjar>
+
+		<jar jarfile="${jar.name}">
+			<manifest>
+				<attribute name="Main-Class" value="GPMLUpdater"/>
+			</manifest>
+			<fileset dir="${build.dir}" includes="**/*"/>
+		</jar>
+	</target>
+</project>

@@ -1,6 +1,8 @@
 *.class
 gpml-updater.jar
 build/
+.classpath
+.project
 
 # Package Files #
 *.war

@@ -2,6 +2,7 @@ import java.io.File;
 
 import org.pathvisio.core.model.ConverterException;
 import org.pathvisio.core.model.Pathway;
+import org.pathvisio.core.view.MIMShapes;
 
 
 public class GPMLUpdater {
@@ -15,6 +16,7 @@ public class GPMLUpdater {
 			File output = new File(args[1]);
 			if(file.exists()) {
 				try {
+					MIMShapes.registerShapes();
 					Pathway pathway = new Pathway();
 					pathway.readFromXml(file, true);
 					
